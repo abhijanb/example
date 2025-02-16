@@ -13,7 +13,7 @@ const SideBar = ({ data }) => {
     }, [data]);
 
     return (
-        <div className="flex w-screen">
+        <div className="flex w-[1314px]">
             {/* Sidebar */}
             <div 
                 className={`transition-all duration-300 fixed top-0 left-0 z-10 h-screen ${state ? "w-64" : "w-22"}  text-white flex flex-col py-4 px-2`}>
@@ -40,8 +40,8 @@ const SideBar = ({ data }) => {
 
             {/* Main Content */}
             <div 
-                className={`transition-all duration-300 ${state ? "w-[calc(100vw-256px)]" : "w-[calc(100vw-86px)]"} bg-blue-500 px-4 py-4 ml-auto`}>
-                    <h1>Recipes</h1>
+                className={`transition-all duration-300 ${state ? "w-[calc(1316px-256px)]" : "w-[calc(1316px-86px)]"} bg-blue-500 px-4 py-4 ml-auto`}>
+                    <h1 className='text-white mb-3'>Recipes</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {loading ? (
                         <h1 className="text-xl font-semibold text-gray-700 text-center w-full">Loading...</h1>
@@ -57,6 +57,7 @@ const SideBar = ({ data }) => {
                                 <p>Preperation time: {element.prepTimeMinutes}</p>
                                 <p>rating: {element.rating}</p>
                                 <div className="mt-4 w-full text-left">
+                                    <p className="text-sm text-gray-700 mb-1 font-bold">Instructions</p>
                                     {element.instructions.map((instruction, index) => (
                                         <p key={index} className="text-sm text-gray-700 mb-1">{index+1 } . {instruction}</p>
                                     ))}
