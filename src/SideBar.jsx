@@ -6,7 +6,6 @@ const SideBar = ({ data }) => {
     const [state, setState] = useState(true); 
     const IconComponent = state ? X : Menu; 
     const [loading, setLoading] = useState(true);
-
     useEffect(() => {
         if (data && data.length > 0) {
             setLoading(false); 
@@ -42,6 +41,7 @@ const SideBar = ({ data }) => {
             {/* Main Content */}
             <div 
                 className={`transition-all duration-300 ${state ? "w-[calc(100vw-256px)]" : "w-[calc(100vw-86px)]"} bg-blue-500 px-4 py-4 ml-auto`}>
+                    <h1>Recipes</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {loading ? (
                         <h1 className="text-xl font-semibold text-gray-700 text-center w-full">Loading...</h1>
@@ -54,6 +54,13 @@ const SideBar = ({ data }) => {
                                     alt={element.title}
                                 />
                                 <p className="mt-4 text-base font-semibold text-green-800">{element.name}</p>
+                                <p>Preperation time: {element.prepTimeMinutes}</p>
+                                <p>rating: {element.rating}</p>
+                                <div className="mt-4 w-full text-left">
+                                    {element.instructions.map((instruction, index) => (
+                                        <p key={index} className="text-sm text-gray-700 mb-1">{index+1 } . {instruction}</p>
+                                    ))}
+                                </div>
                             </div>
                         ))
                     ) : (
