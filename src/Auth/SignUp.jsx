@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router';
+import user from '../user';
 
 const SignUp = () => {
     const { register, handleSubmit,watch, formState: {
@@ -9,29 +10,38 @@ const SignUp = () => {
     const navigate = useNavigate();
 const [error,setError] = useState();
     const submitHandler = async (data) => {
-try {
+// try {
   
   
-  const response = await fetch("link",{
-    method: "post",
-    headers: {
-      'Content-Type' : 'application/json'
-    },
-    body:{
-      data: JSON.stringify(data),
-    }
-  })
+//   const response = await fetch("link",{
+//     method: "post",
+//     headers: {
+//       'Content-Type' : 'application/json'
+//     },
+//     body:{
+//       data: JSON.stringify(data),
+//     }
+//   })
   
-  if(!response.ok){
-    const APIerror = await response.json();
-    setError(APIerror?.message || "something went wrong");
-  }
-  else { navigate('/');
-}} catch (error) {
-  console.log("error",error)
-  setError(error?.message);
+//   if(!response.ok){
+//     const APIerror = await response.json();
+//     setError(APIerror?.message || "something went wrong");
+//   }
+//   else { navigate('/');
+// }} catch (error) {
+//   console.log("error",error)
+//   setError(error?.message);
   
-}
+// }
+const name = data.firstName + "" + data.lastName;
+const email = data.email;
+const password = data.password;
+user.push({
+  name: name,
+  email: email,
+  password: password
+});
+navigate('/signIn');
 
     }
     return (

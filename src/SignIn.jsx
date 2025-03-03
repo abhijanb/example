@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router';
 import axios from "axios"
+import user from './user';
 
 const SignIn = () => {
     const {register,handleSubmit,formState:{
@@ -10,23 +11,32 @@ const SignIn = () => {
     const navigate = useNavigate();
     const [error,setError] = useState("");
     const submitHandler = async(data) => {
-        try {
+        // try {
           
-          const response = await axios.post("https://67b00f44dffcd88a67884114.mockapi.io/api/post/",{
-            data
-          },{
-            withCredentials: true,
-          });
-          if(response.status == 200){
+        //   const response = await axios.post("https://67b00f44dffcd88a67884114.mockapi.io/api/post/",{
+        //     data
+        //   },{
+        //     withCredentials: true,
+        //   });
+        //   if(response.status == 200){
 
-            console.log("login successful");
-            navigate("/");
-          }
-        } catch (error) {
-          console.error("error message",error.message);
-          setError(error.response?.data?.message || 'An error occurred. Please try again.');
-        }
-        
+        //     console.log("login successful");
+        //     navigate("/");
+        //   }
+        // } catch (error) {
+        //   console.error("error message",error.message);
+        //   setError(error.response?.data?.message || 'An error occurred. Please try again.');
+        // }
+        const email = data.email;
+        const password = data.password;
+        user.forEach(element => {
+          if(email == element.email && password == element.password){
+            navigate('/');
+          } 
+
+        });
+        setError('login doesnot match');
+
     }
   return (
 <div className="w-screen h-screen flex justify-center items-center bg-gray-100">
@@ -36,7 +46,7 @@ const SignIn = () => {
   >
     
     {/* State Message */}
-    {error && <p className="text-gray-700 text-center">{error}</p>}
+    {error && <p className="text-red-700 text-center">{error}</p>}
 
     {/* Email Input */}
     <input
